@@ -20,7 +20,6 @@
       to classify hand gestures. The controller underwent extensive testing showing 
       promising performance in gesture detection accuracy, responsiveness, and 
       robustness across varying environmental conditions.
-
     </p>
 
   </mat-card-content>
@@ -139,10 +138,11 @@
     </p>
     <p>
       To facilitate the process of capturing the images from each frame, MediaPipe was used to take the 
-      landmarks of the hand and crop out everything else. This allowed to keep an image of the hand only
-      doing the intended gesture, this image was resized to 3 x 224 x 224 so it was consistent across
+      landmarks of the hand and based on this do a crop to keep only the hand. This image then was resized to 3 x 224 x 224 so it was consistent across
       the entire dataset.
     </p>
+    <h2>Sample of the gestures captures with their respective labels</h2>
+    <img src="../assets/Images/GesturesCNN.png" width="400">
     <h1>Pre-Processing and Training</h1>
     <p>Three different CNNs were trained with their RGB and Grayscale variants 
       with the previous dataset to determine which one has the most precision for gesture classification:
@@ -221,13 +221,15 @@
       gesture if it was too complex, but one advantage is that they were noticeably 
       faster to execute.
     </p>
-    <p class="bold">[VIDEO EXAMPLE]</p>
     <p>On the other side VGG16 found the best results even if the hand was found in 
       complicated backgrounds with low contrast or with multiple objects behind the hand, 
       indicating that the model was less overfit and instead was detecting the features of 
       the gesture correctly, at the expense of using more computer resources.
     </p>
-    <p class="bold">[VIDEO EXAMPLE]</p>
+
+    <iframe width="560" height="315" src="https://www.youtube.com/embed/ftWDoE8w2EU?si=FLSDUj3B_gz79WEf" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+
+    <h1>Implementation approach</h1>
     <p>
       The final implementation of the program used the landmarks, since it was found to 
       be ideal to track the mouse and detect the gestures for mice actions as it was more 
@@ -240,6 +242,7 @@
       environments where the hand was on complicated scenarios like low contrast or 
       with objects and furniture behind.
     </p>
+    
     <p>
       To not run the CNN model and the Landmarks model at the same time with the 
       objective to save resources, an approach of using the hands position was used 
@@ -253,7 +256,7 @@
   <mat-card-title>Experiments & Results</mat-card-title>
   <mat-divider></mat-divider>
   <mat-card-content>
-    <h1 class="bold">Training Results</h1>
+    <h1 class="bold">CNN Training Results</h1>
     <h1>AlexNet</h1>
     <h3>Confusion Matrix</h3>
     <img src="../assets/Images/AlexNet-CF.png" width="400">
@@ -285,7 +288,16 @@
     <h3>Confusion Matrix</h3>
     <img src="../assets/Images/ResNetGray-CF.png" width="400">
     <img src="../assets/Images/ResNet-Gray-Train.png" width="400">
+
+    <h1 class="bold">Testing Gestures in different environments with webcam</h1>
+    <p>The performance of the approaches was done based on their accuracy on different environments: Lit Environment, Dim Environment and Dark Environment</p>
+    <h1>Results</h1>
+    <img src="../assets/Images/Result_LitEnvironment.png" width="400">
+    <img src="../assets/Images/Result_DimEnvironment.png" width="400">
+    <img src="../assets/Images/Result_DarkEnvironment.png" width="400">
+    
   </mat-card-content>
+  <mat-card-content><img src="../assets/Images/Result_Graph.png" width="600"></mat-card-content>
 </mat-card>
 
 <mat-card>
